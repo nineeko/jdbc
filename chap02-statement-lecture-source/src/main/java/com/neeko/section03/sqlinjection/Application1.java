@@ -1,27 +1,34 @@
-package com.neeko.statement;
+package com.neeko.section03.sqlinjection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static com.neeko.common.JDBCTemplate.getConnection;
 import static com.neeko.common.JDBCTemplate.close;
 import static com.neeko.common.JDBCTemplate.getConnection;
 
 public class Application1 {
+
+    private static String empId = "200";
+    private static String empName = "' or 1=1 and emp_id='200";
+
     public static void main(String[] args) {
         Connection con = getConnection();
         Statement stmt = null;
         ResultSet rset = null;
-        try {
-            /* Statement : 쿼리를 운반하고 그 결과를 반환하는 객체 */
-            stmt = con.createStatement();
-            /* ResultSet : Statement 객체를 통해 조회 처리된 결과를 다루는 객체 */
-            rset = stmt.executeQuery("SELECT * FROM employee");
 
-            while(rset.next()) { // 결과 행의 존재 여부를 확인
-                System.out.print(rset.getString("emp_name")+" ");
-                System.out.println(rset.getInt("salary"));
+        String query = "select * from employee where emp_id = '" + empId + "' and emp_name = '" + empName + "'";
+
+        try {
+            stmt = con.createStatement();
+            rset = stmt.executeQuery(query);
+
+            if(rset.next()) {
+                System.out.println(rset.getString("emp_name") + "님 환영합니다.");
+            } else {
+                System.out.println("해당 사원은 존재하지 않습니다.");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

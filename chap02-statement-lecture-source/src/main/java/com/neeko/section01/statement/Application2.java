@@ -1,4 +1,4 @@
-package com.neeko.statement;
+package com.neeko.section01.statement;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,7 +28,7 @@ public class Application2 {
             int input = sc.nextInt();
             boolean found = false;
             while(rset.next()) {
-            if(rset.getInt("emp_id")==input) { // 결과 행의 존재 여부를 확인
+            if(rset.getInt("emp_id")==input) {
                 System.out.print(rset.getInt("emp_id")+" ");
                 System.out.print(rset.getString("emp_name")+" ");
                 System.out.println(rset.getInt("salary"));
@@ -46,6 +46,37 @@ public class Application2 {
             close(rset);
             close(stmt);
             close(con);
+//            public class Application2 {
+//                public static void main(String[] args) {
+//                    Connection con = getConnection();
+//                    Statement stmt = null;
+//                    ResultSet rset = null;
+//                    Scanner sc = new Scanner(System.in);
+//                    System.out.print("조회하고 싶은 사번 : ");
+//                    int empId = sc.nextInt();
+//
+//                    try {
+//                        stmt = con.createStatement();
+//                        rset = stmt.executeQuery(
+//                                "select emp_id, emp_name, salary from employee where emp_id=" + empId
+//                        );
+//                        if(rset.next()) {
+//                            String empName = rset.getString("emp_name");
+//                            int salary = rset.getInt("salary");
+//                            System.out.println(empId + " " + empName + " " + salary);
+//                        } else {
+//                            System.out.println("해당 사원의 조회 결과가 없습니다.");
+//                        }
+//                    } catch (SQLException e) {
+//                        throw new RuntimeException(e);
+//                    } finally {
+//                        close(rset);
+//                        close(stmt);
+//                        close(con);
+//                    }
+//
+//
+//                }
         }
 
 
