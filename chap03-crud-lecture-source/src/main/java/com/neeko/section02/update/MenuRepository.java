@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static com.neeko.common.JDBCTemplate.close;
+
 public class MenuRepository {
     public int updateMenu(Connection con, Menu menu) {
     PreparedStatement pstmt = null;
@@ -33,6 +35,8 @@ public class MenuRepository {
         throw new RuntimeException(e);
     } catch (IOException e) {
         throw new RuntimeException(e);
+    }finally {
+        close(pstmt);
     }
     return result;
 }

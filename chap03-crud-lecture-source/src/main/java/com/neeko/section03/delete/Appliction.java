@@ -12,6 +12,6 @@ public class Appliction {
         Menu menu = new Menu(menuCode);
 
         MenuService menuService = new MenuService();
-        menuService.registMenu(menu);
+        menuService.deleteMenu(menu);
     }
 }

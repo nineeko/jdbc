@@ -7,7 +7,7 @@ import static com.neeko.common.JDBCTemplate.*;
 import static com.neeko.common.JDBCTemplate.close;
 
 public class MenuService {
-    public void registMenu(Menu menu) {
+    public void modifyMenu(Menu menu) {
         Connection con = getConnection();
         MenuRepository menuRepository = new MenuRepository();
         int result = menuRepository.updateMenu(con, menu);

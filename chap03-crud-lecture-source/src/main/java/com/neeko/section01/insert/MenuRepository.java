@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static com.neeko.common.JDBCTemplate.close;
+
 /* Repository 계층
  * DBMS를 통해 수행 되는 CRUD 작업 단위의 메소드를 정의 */
 public class MenuRepository {
@@ -35,6 +37,8 @@ public class MenuRepository {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }finally {
+            close(pstmt);
         }
         return result;
     }
